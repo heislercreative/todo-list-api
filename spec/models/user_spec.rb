@@ -23,7 +23,7 @@ RSpec.describe User, type: :model do
 
 
 
-context 'email' do
+  context 'email' do
     it 'should be present' do
       expect(User.new(missing_email)).to be_invalid
     end

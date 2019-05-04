@@ -17,6 +17,7 @@ RSpec.describe Project, type: :model do
   let(:missing_user) { attributes.except(:user_id) }
 
 
+
   context 'name' do
     it 'should be present' do
       expect(Project.new(missing_name)).to be_invalid
@@ -29,5 +30,4 @@ RSpec.describe Project, type: :model do
   it 'should belong to a User' do
     expect(Project.new(missing_user)).to be_invalid
   end
-
 end
