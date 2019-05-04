@@ -34,6 +34,8 @@ gem 'active_model_serializers'
 gem 'dotenv-rails'
 
 group :development, :test do
+  # Use RSpec instead of Minitest
+  gem 'rspec-rails', '~> 3.8'
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
