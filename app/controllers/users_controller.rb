@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+  def show
+    @user = User.find(params[:id])
+    render json: @user, status: 200
+  end
+
   def create
     @user = User.new(signup_params)
     if @user.save
@@ -11,7 +16,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @user.update(update_params)
     if @user.save
-      render json: @user, status: 201
+      render json: @user, status: 200
     end
   end
 

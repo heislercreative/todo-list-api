@@ -1,15 +1,14 @@
 class TasksController < ApplicationController
 
   def index
-    @user =
     @tasks = Project.find_by(id: params[:project_id]).tasks
-    render json: @tasks, status: 201
+    render json: @tasks, status: 200
   end
 
-  def show
-    @task = Task.find_by(id: params[:id])
-    render json: @task, status: 201
-  end
+  # def show
+  #   @task = Task.find_by(id: params[:id])
+  #   render json: @task, status: 200
+  # end
 
   def create
     @task = Task.new(task_params)
@@ -20,8 +19,9 @@ class TasksController < ApplicationController
 
   def update
     @task = Task.find_by(id: params[:id])
+    @task.update(task_params)
     if @task.save
-      render json: @task, status: 201
+      render json: @task, status: 200
     end
   end
 

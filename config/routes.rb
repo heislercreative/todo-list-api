@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope '/api/v1' do
-    resources :users do
+    resources :users, except: [:index] do
       resources :projects, only: [:index, :create]
     end
 
@@ -8,6 +8,6 @@ Rails.application.routes.draw do
       resources :tasks, only: [:index, :create]
     end
 
-    resources :tasks, only: [:show, :update, :destroy]
+    resources :tasks, only: [:update, :destroy]
   end
 end
