@@ -13,14 +13,17 @@ module Api::V1
 
     def create
       @task = Task.new(task_params)
+      # Unsure whether to return project or just the project's tasks
+      @project = Project.find_by(id: params[:project_id])
       if @task.save
-        render json: @task, status: 201
+        render json: @project, status: 201
       end
     end
 
     def update
       @task = Task.find_by(id: params[:id])
-      @task.update(task_params)
+      # Toggle completed status from true to false or vice versa
+      @task.completed = !@task.completed
       if @task.save
         render json: @task, status: 200
       end
@@ -35,7 +38,7 @@ module Api::V1
     private
 
     def task_params
-      params.require(:task).permit(:text, :project_id)
+      params.permit(:text, :project_id)
     end
   end
 end
