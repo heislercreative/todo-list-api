@@ -10,6 +10,8 @@ module Api::V1
       @user = User.new(signup_params)
       if @user.save
         render json: @user, status: 201
+      else
+        render json: @user.errors, status: 422
       end
     end
 
@@ -18,6 +20,8 @@ module Api::V1
       @user.update(update_params)
       if @user.save
         render json: @user, status: 200
+      else
+        render json: @user.errors, status: 422
       end
     end
 

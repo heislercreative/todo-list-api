@@ -15,6 +15,8 @@ module Api::V1
       @project = Project.new(project_params)
       if @project.save
         render json: @project, status: 201
+      else
+        render json: @project.errors, status: 422
       end
     end
 
@@ -23,6 +25,8 @@ module Api::V1
       @project.update(project_params)
       if @project.save
         render json: @project, status: 200
+      else
+        render json: @project.errors, status: 422
       end
     end
 

@@ -17,6 +17,8 @@ module Api::V1
       @project = Project.find_by(id: params[:project_id])
       if @task.save
         render json: @project, status: 201
+      else
+        render json: @task.errors, status: 422
       end
     end
 
@@ -26,6 +28,8 @@ module Api::V1
       @task.completed = !@task.completed
       if @task.save
         render json: @task, status: 200
+      else
+        render json: @task.errors, status: 422
       end
     end
 
