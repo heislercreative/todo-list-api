@@ -28,6 +28,7 @@ module Api::V1
 
     def destroy
       @project = Project.find_by(id: params[:id])
+      # Delete all project tasks before deleting project
       @project.tasks.each { |task| task.destroy }
       @project.destroy
     end
@@ -36,7 +37,7 @@ module Api::V1
     private
 
     def project_params
-      params.require(:project).permit(:name, :user_id)
+      params.require(:project).permit(:id, :name, :user_id)
     end
   end
 end

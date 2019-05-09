@@ -38,7 +38,7 @@ module Api::V1
     private
 
     def task_params
-      params.permit(:text, :project_id)
+      params.require(:task).permit(:text, :project_id)
     end
   end
 end
