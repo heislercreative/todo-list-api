@@ -25,7 +25,7 @@ module Api::V1
     def update
       @task = Task.find_by(id: params[:id])
       # Toggle completed status from true to false or vice versa
-      @task.completed = !@task.completed
+      @task.completion = !@task.completion
       if @task.save
         render json: @task, status: 200
       else
