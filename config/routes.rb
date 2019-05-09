@@ -10,6 +10,10 @@ Rails.application.routes.draw do
       end
 
       resources :tasks, only: [:update, :destroy]
+
+      post 'auth' => 'auth#create'
+      get '/auth/facebook/callback' => 'auth#create'
+      delete 'auth' => 'auth#destroy'
     end
   end
 end
