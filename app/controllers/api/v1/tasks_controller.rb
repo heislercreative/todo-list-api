@@ -26,7 +26,7 @@ module Api::V1
       project = Project.find_by(id: params[:project_id])
       if project.user == logged_in_user
         if @task.save
-          render json: @project, status: 201
+          render json: @task, status: 201
         else
           render json: @task.errors, status: 422
         end
@@ -37,11 +37,12 @@ module Api::V1
 
     def update
       if @task = Task.find_by(id: params[:id])
+        @tasks = @task.project.tasks
         # Toggle completed status from true to false or vice versa
         if @task.project.user == logged_in_user
           @task.completion = !@task.completion
           if @task.save
-            render json: @task, status: 200
+            render json: @tasks, status: 200
           else
             render json: @task.errors, status: 422
           end
@@ -55,8 +56,10 @@ module Api::V1
 
     def destroy
       if @task = Task.find_by(id: params[:id])
+        @tasks = @task.project.tasks
         if @task.project.user == logged_in_user
           @task.destroy
+          render json: @tasks, status: 200
         else
           render json: { error: 'Access forbidden' }, status: 403
         end

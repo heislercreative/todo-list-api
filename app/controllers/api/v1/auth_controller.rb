@@ -3,13 +3,13 @@ module Api::V1
 
     def create
       @user = User.find_by(email: params[:email])
-      if @user
+      if @user.authenticate(params[:password])
         login(@user)
         render json: @user, status: 201
       else
         render json: {
             error: 'Username or password incorrect'
-          }, status: 404
+          }, status: 400
       end
     end
 
