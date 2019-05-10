@@ -1,5 +1,6 @@
 module Api::V1
   class UsersController < ApplicationController
+    before_action :authenticate_user, except: :create
 
     def show
       @user = User.find(params[:id])

@@ -11,9 +11,9 @@ Rails.application.routes.draw do
 
       resources :tasks, only: [:update, :destroy]
 
-      post 'auth' => 'auth#create'
+      post 'auth/login' => 'auth#create'
       get '/auth/facebook/callback' => 'auth#create'
-      delete 'auth' => 'auth#destroy'
+      delete 'auth/logout' => 'auth#destroy'
     end
   end
 end

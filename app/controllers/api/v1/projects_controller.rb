@@ -1,14 +1,19 @@
 module Api::V1
   class ProjectsController < ApplicationController
+    before_action :authenticate_user
 
     def index
-      @projects = User.find_by(id: params[:user_id]).projects
+      @projects = logged_in_user.projects
       render json: @projects, status: 200
     end
 
     def show
       @project = Project.find_by(id: params[:id])
-      render json: @project, status: 200
+      if @project.user_id == logged_in_user.id
+        render json: @project, status: 200
+      else
+        render json: { message: exception.message }, status: :invalid_token
+      end
     end
 
     def create

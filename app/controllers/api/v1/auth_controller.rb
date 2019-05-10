@@ -4,10 +4,7 @@ module Api::V1
     def create
       @user = User.find_by(email: params[:email])
       if @user
-        hmac_secret = 'c0n$tra!n3d'
-        payload = {id: @user.id}
-        created_jwt = JWT.encode payload, hmac_secret, 'HS256'
-        cookies.signed[:jwt] = {value: created_jwt, httponly: true, expires: 2.days.from_now}
+        login(@user)
         render json: @user, status: 201
       else
         render json: {

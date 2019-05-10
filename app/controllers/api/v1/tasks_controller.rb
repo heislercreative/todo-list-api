@@ -1,5 +1,6 @@
 module Api::V1
   class TasksController < ApplicationController
+    before_action :authenticate_user
 
     def index
       @tasks = Project.find_by(id: params[:project_id]).tasks
