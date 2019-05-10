@@ -2,14 +2,15 @@ module Api::V1
   class AuthController < ApplicationController
 
     def create
-      @user = User.find_by(email: params[:email])
-      if @user.authenticate(params[:password])
-        login(@user)
-        render json: @user, status: 201
+      if @user = User.find_by(email: params[:email])
+        if @user.authenticate(params[:password])
+          login(@user)
+          render json: @user, status: 201
+        else
+          login_error
+        end
       else
-        render json: {
-            error: 'Username or password incorrect'
-          }, status: 400
+        login_error
       end
     end
 

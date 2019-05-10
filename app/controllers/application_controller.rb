@@ -22,9 +22,16 @@ class ApplicationController < ActionController::API
     @logged_in_user ||= User.find_by(id: token_user_id) if authenticate_user
   end
 
+  def login_error
+    render json: {
+        error: 'Username or password incorrect'
+      }, status: 400
+  end
+
   helper_method :login
   helper_method :authenticate_user
   helper_method :logged_in_user
+  helper_method :login_error
 
   private
 
