@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
       get 'user' => 'users#show'
       post 'auth/login' => 'auth#create'
-      get '/auth/facebook/callback' => 'auth#create'
+      post '/auth/facebook' => 'auth#create_fb'
       delete 'auth/logout' => 'auth#destroy'
     end
   end
