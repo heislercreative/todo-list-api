@@ -8,7 +8,7 @@ Rails API for todo list application. Allows a user to create/edit/delete project
 2) Run `bundle install` to install necessary gems.
 3) Run `rake db:migrate` and `rake db:seed` to create/populate the API database.
 4) Run `rails s -p 3001` to launch the API server (on port 3001).
-5) Run `yarn` from the client directory, and navigate to http://localhost:3000 to view the React app.
+5) Run `yarn start` from the client directory, and navigate to http://localhost:3000 to view the React app.
 
 ## Contributing
 
