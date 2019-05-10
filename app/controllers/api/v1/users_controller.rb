@@ -3,7 +3,8 @@ module Api::V1
     before_action :authenticate_user, except: :create
 
     def show
-      @user = User.find(params[:id])
+      logged_in_user
+      @user = logged_in_user
       render json: @user, status: 200
     end
 

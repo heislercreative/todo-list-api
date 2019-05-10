@@ -15,7 +15,7 @@ RSpec.describe Task, type: :model do
   end
 
   let(:missing_text) { attributes.except(:text) }
-  let(:long_text) { attributes.merge(text: 'This task text has gone on long enough, right?') }
+  let(:long_text) { attributes.merge(text: 'This task text has gone on long enough, am I right, huh? I mean, seriously.') }
   let(:missing_status) { attributes.except(:completed) }
   let(:missing_project) { attributes.except(:project_id) }
 

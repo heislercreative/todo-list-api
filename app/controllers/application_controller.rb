@@ -11,8 +11,11 @@ class ApplicationController < ActionController::API
   end
 
   def authenticate_user
-    token = cookies.signed[:jwt]
-    body = JWT.decode(token, HMAC_SECRET, true, { algorithm: 'HS256' })
+    if token = cookies.signed[:jwt]
+      body = JWT.decode(token, HMAC_SECRET, true, { algorithm: 'HS256' })
+    else
+      render json: {error: 'Unauthorized'}, status: 401
+    end
   end
 
   def logged_in_user
