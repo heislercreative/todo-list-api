@@ -4,7 +4,7 @@ Rails API for todo list application. Allows a user to create/edit/delete project
 
 ## Installation & Usage
 
-1) To start using the app, clone and fetch both this repository and the [_Todo List Client_](https://heislercreative.com/todo-list-client).
+1) To start using the app, clone and fetch both this repository and the [_Todo List Client_](https://github.com/heislercreative/todo-list-client).
 2) Run `bundle install` to install necessary gems.
 3) Run `rake db:migrate` and `rake db:seed` to create/populate the API database.
 4) Run `rails s -p 3001` to launch the API server (on port 3001).
