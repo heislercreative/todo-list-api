@@ -14,7 +14,6 @@ module Api::V1
     end
 
     def create_fb
-      # binding.pry
       @user = User.find_or_create_by(uid: auth_params[:id]) do |u|
           u.email = auth_params['email']
           u.first_name = auth_params['first_name']
