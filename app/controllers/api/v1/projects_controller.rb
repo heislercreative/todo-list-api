@@ -9,15 +9,15 @@ module Api::V1
 
     def show
       @project = Project.find_by(id: params[:id])
-      if @project.user_id == logged_in_user.id
+      if @project.user == logged_in_user
         render json: @project, status: 200
       else
-        render json: { message: exception.message }, status: :invalid_token
+        render json: { error: 'Access forbidden' }, status: 403
       end
     end
 
     def create
-      @project = Project.new(project_params)
+      @project = logged_in_user.projects.new(project_params)
       if @project.save
         render json: @project, status: 201
       else
@@ -27,26 +27,34 @@ module Api::V1
 
     def update
       @project = Project.find_by(id: params[:id])
-      @project.update(project_params)
-      if @project.save
-        render json: @project, status: 200
+      if @project.user == logged_in_user
+        @project.update(project_params)
+        if @project.save
+          render json: @project, status: 200
+        else
+          render json: @project.errors, status: 422
+        end
       else
-        render json: @project.errors, status: 422
+        render json: { error: 'Access forbidden' }, status: 403
       end
     end
 
     def destroy
       @project = Project.find_by(id: params[:id])
-      # Delete all project tasks before deleting project
-      @project.tasks.each { |task| task.destroy }
-      @project.destroy
+      if @project.user == logged_in_user
+        # Delete all project tasks before deleting project
+        @project.tasks.each { |task| task.destroy }
+        @project.destroy
+      else
+        render json: { error: 'Access forbidden' }, status: 403
+      end
     end
 
 
     private
 
     def project_params
-      params.require(:project).permit(:id, :name, :user_id)
+      params.require(:project).permit(:id, :name)
     end
   end
 end
