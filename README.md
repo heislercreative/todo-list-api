@@ -20,4 +20,4 @@ This project is available as open source under the terms of the [MIT License](ht
 
 ## Code of Conduct
 
-Everyone interacting in the Ultimate Moviegoers Guide project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/heislercreative/todo-list-api/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Todo List API project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/heislercreative/todo-list-api/blob/master/CODE_OF_CONDUCT.md).
