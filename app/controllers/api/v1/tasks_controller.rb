@@ -3,12 +3,15 @@ module Api::V1
     before_action :authenticate_user
 
     def index
-      project = Project.find_by(id: params[:project_id])
-      if project.user == logged_in_user
-        @tasks = project.tasks
-        render json: @tasks, status: 200
+      if project = Project.find_by(id: params[:project_id])
+        if project.user == logged_in_user
+          @tasks = project.tasks
+          render json: @tasks, status: 200
+        else
+          render json: { error: 'Access forbidden' }, status: 403
+        end
       else
-        render json: { error: 'Access forbidden' }, status: 403
+        render json: { error: 'Resource not found'}, status: 404
       end
     end
 
@@ -33,26 +36,32 @@ module Api::V1
     end
 
     def update
-      @task = Task.find_by(id: params[:id])
-      # Toggle completed status from true to false or vice versa
-      if @task.project.user == logged_in_user
-        @task.completion = !@task.completion
-        if @task.save
-          render json: @task, status: 200
+      if @task = Task.find_by(id: params[:id])
+        # Toggle completed status from true to false or vice versa
+        if @task.project.user == logged_in_user
+          @task.completion = !@task.completion
+          if @task.save
+            render json: @task, status: 200
+          else
+            render json: @task.errors, status: 422
+          end
         else
-          render json: @task.errors, status: 422
+          render json: { error: 'Access forbidden' }, status: 403
         end
       else
-        render json: { error: 'Access forbidden' }, status: 403
+        render json: { error: 'Resource not found'}, status: 404
       end
     end
 
     def destroy
-      @task = Task.find_by(id: params[:id])
-      if @task.project.user == logged_in_user
-        @task.destroy
+      if @task = Task.find_by(id: params[:id])
+        if @task.project.user == logged_in_user
+          @task.destroy
+        else
+          render json: { error: 'Access forbidden' }, status: 403
+        end
       else
-        render json: { error: 'Access forbidden' }, status: 403
+        render json: { error: 'Resource not found'}, status: 404
       end
     end
 
