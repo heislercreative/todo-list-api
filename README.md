@@ -10,6 +10,10 @@ Rails API for todo list application. Allows a user to create/edit/delete project
 4) Run `rails s -p 3001` to launch the API server (on port 3001).
 5) Run `yarn start` from the client directory, and navigate to http://localhost:3000 to view the React app.
 
+## Live deployment
+
+http://todo-list-heisler.herokuapp.com
+
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/heislercreative/todo-list-api. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
